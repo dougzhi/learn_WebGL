@@ -1,12 +1,12 @@
 <template>
   <div class="home">
-    <host/>
+    <router-link to="/test1">课程一</router-link>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import host from '@/components/host.vue'
+import host from '@/components/test1.vue'
 
 export default {
   name: 'Home',

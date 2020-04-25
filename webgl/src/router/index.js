@@ -10,11 +10,11 @@ Vue.use(VueRouter)
     name: 'Home',
     component: Home
   },
-  // {
-    // path: '/about',
-    // name: 'About',
-    // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
-  // }
+  {
+    path: '/test1',
+    name: 'test1',
+    component: () => import(/* webpackChunkName: "about" */ '../components/test1.vue')
+  }
 ]
 
 const router = new VueRouter({
