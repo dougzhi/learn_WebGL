@@ -3,11 +3,12 @@
     <div id="WebGL-output"></div>
     <div id="Stats-output"></div>
 
-    <div id="label" ref="labels">{{name}}</div>
+    <div id="label">{{name}}</div>
   </div>
 </template>
 
 <script>
+    import $ from 'jquery';
     import * as THREE from 'three'
     import Stats from "three/examples/jsm/libs/stats.module";   //ES6
     import * as dat from 'dat.gui';
@@ -24,6 +25,8 @@
                 light: null,
                 selectObject: null,
                 name: '',
+                labelDom: null,
+                containerDom: null,
             }
         },
         mounted() {
@@ -32,6 +35,9 @@
         },
         methods: {
             init() {
+                this.labelDom = document.getElementById("label")
+                this.containerDom = document.getElementById("container")
+
                 this.stats = this.initStats();
                 this.initScene();
                 this.initCamera();
@@ -59,8 +65,7 @@
                 this.renderer = new THREE.WebGLRenderer({antialias: true});
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.setClearColor(0x050505);
-                let container = document.getElementById("container");
-                container.appendChild( this.renderer.domElement );
+                this.containerDom.appendChild( this.renderer.domElement );
             },
             // 初始化模型
             initContent() {
@@ -107,9 +112,6 @@
             // 获取与射线相交的对象数组
             getIntersects(event) {
                 event.preventDefault();
-                console.log("event.clientX:" + event.clientX);
-                console.log("event.clientY:" + event.clientY);
-
                 // 声明 raycaster 和 mouse 变量
                 let raycaster = new THREE.Raycaster();
                 let mouse = new THREE.Vector2();
@@ -187,7 +189,7 @@
                 stats.domElement.style.left = '0px';
                 stats.domElement.style.top = '0px';
 
-                document.body.appendChild(stats.domElement);
+                this.containerDom.appendChild(stats.domElement);
                 return stats;
             },
 
@@ -200,9 +202,11 @@
                 // 逆转相机求出二维坐标
                 let vector = object.position.clone().project(this.camera);
 
-                //修改 div 的位置
-                this.$refs.labels.style.left = vector.x * halfWidth + halfWidth + "px";
-                this.$refs.labels.style.top = -vector.y * halfHeight + halfHeight - object.position.y + "px";
+                // 修改 div 的位置
+                $("#label").css({
+                    left: vector.x * halfWidth + halfWidth,
+                    top: -vector.y * halfHeight + halfHeight - object.position.y
+                });
                 // 显示模型信息
                 this.name = object.name;
             },
