@@ -38,6 +38,7 @@
                 let material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
                 let cube = new THREE.Mesh( geometry, material );
                 scene.add( cube );
+                container.addEventListener("click", () => alert(0))
 
                 camera.position.z = 5;
 
