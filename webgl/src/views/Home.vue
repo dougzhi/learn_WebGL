@@ -3,6 +3,8 @@
     <router-link to="/test1">测试一</router-link>
     <br/>
     <router-link to="/test2">测试二</router-link>
+    <br/>
+    <router-link to="/test3">测试三</router-link>
   </div>
 </template>
 
