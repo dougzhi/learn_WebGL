@@ -14,6 +14,8 @@
     "stats.js": "^0.17.0",
     "three": "^0.115.0",
     "three-css2drender": "^1.0.0",
+    "three-json-loader": "^1.0.0",
+    "three-legacyjsonloader": "^1.0.6",
     "three-obj-mtl-loader": "^1.0.3",
     "three-orbit-controls": "^82.1.0",
     "three-orbitcontrols": "^2.110.3",

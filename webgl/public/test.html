@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="http://www.yanhuangxueyuan.com/versions/threejsR92/build/three.min.js"></script>
+  <script src="http://www.yanhuangxueyuan.com/versions/threejsR92/examples/js/controls/OrbitControls.js"></script>
+  <script src="http://www.yanhuangxueyuan.com/versions/threejsR92/examples/js/loaders/OBJLoader.js"></script>
+  <script src="http://www.yanhuangxueyuan.com/versions/threejsR92/examples/js/renderers/CSS2DRenderer.js"></script>
+  <script type="text/javascript" src="http://www.yanhuangxueyuan.com/versions/threejsR92/examples/js/postprocessing/EffectComposer.js"></script>
+  <script type="text/javascript" src="http://www.yanhuangxueyuan.com/versions/threejsR92/examples/js/postprocessing/RenderPass.js"></script>
+  <script type="text/javascript" src="http://www.yanhuangxueyuan.com/versions/threejsR92/examples/js/postprocessing/ShaderPass.js"></script>
+  <script type="text/javascript" src="http://www.yanhuangxueyuan.com/versions/threejsR92/examples/js/shaders/CopyShader.js"></script>
+  <script type="text/javascript" src="http://www.yanhuangxueyuan.com/versions/threejsR92/examples/js/postprocessing/OutlinePass.js"></script>
+  <script src="http://www.yanhuangxueyuan.com/js/vue@2.5.16.min.js"></script>
+  <script src="http://www.yanhuangxueyuan.com/js/element-ui/index.js"></script>
+  <link rel="stylesheet" href="http://www.yanhuangxueyuan.com/js/element-ui/index.css">
+  <script type="text/javascript" src="http://www.yanhuangxueyuan.com/versions/threejsR92/examples/js/shaders/FXAAShader.js"></script>
+
+</head>
+<body>
+
+</body>
+<script>
+  let scene = new THREE.Scene();
+  let camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+  let renderer = new THREE.WebGLRenderer();
+  renderer.setSize( window.innerWidth, window.innerHeight );
+  document.body.appendChild( renderer.domElement );
+
+  let geometry = new THREE.BoxGeometry( 1, 1, 1 );
+  let material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+  let cube = new THREE.Mesh( geometry, material );
+  scene.add( cube );
+
+  var objectLoader = new THREE.JSONLoader();
+  objectLoader.load("model/test.js", function ( geometry ) {
+      var material = new THREE.MeshLambertMaterial();
+      let mesh = new THREE.Mesh(geometry, material);
+      scene.add(mesh);
+
+  } );
+
+  camera.position.z = 5;
+
+  //自动选装
+  let animate = function () {
+      requestAnimationFrame( animate );
+
+      cube.rotation.x += 0.01;
+      cube.rotation.y += 0.01;
+
+      renderer.render( scene, camera );
+  };
+
+  animate();
+</script>
+</html>

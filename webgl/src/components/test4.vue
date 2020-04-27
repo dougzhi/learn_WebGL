@@ -100,15 +100,7 @@
 
                 let loader = new THREE.ObjectLoader()
 
-                loader.load('models/file.json', group => {
-                    //处理加载模型为黑色问题
-                    group.traverse(child => {
-                        if (child.isMesh) {
-                            child.material.emissive = child.material.color
-                            child.material.emissiveMap = child.material.map
-                        }
-                    })
-
+                loader.load('models/test.js', group => {
                     scene.add(group)
                 }, xhr => {
                     // called while loading is progressing
