@@ -43,7 +43,7 @@
                 this.initScene();
                 this.initCamera();
                 this.initRenderer();
-                this.initContent();
+                // this.initContent();
                 this.loadObj();
                 this.initLight();
                 this.initControls();
@@ -64,6 +64,9 @@
             },
             // 渲染器
             initRenderer() {
+                let helper = new THREE.GridHelper(1200, 50, 0xCD3700, 0x4A4A4A);
+                this.scene.add(helper);
+
                 this.renderer = new THREE.WebGLRenderer({antialias: true});
                 this.renderer.setSize(window.innerWidth, window.innerHeight);
                 this.renderer.setClearColor(0x050505);
@@ -72,21 +75,29 @@
             //外部模型加载函数
             loadObj() {
                 //包含材质
+                let _this = this;
                 new MTLLoader().setPath('/model/').load('test.mtl', materials => {
                     console.log("materials", materials);
                     materials.preload();
                     new OBJLoader().setMaterials(materials).setPath('/model/').load('test.obj', obj => {
+
+                        // if (obj.children !== undefined && obj.children !== null && obj.children.length !== 0) {
+                        //     for (let i = obj.children.pop(); i !== undefined; i = obj.children.pop()) {
+                        //         _this.scene.add(i);
+                        //     }
+                        // } else {
+                        //     obj.scale.set(30, 30, 30);
+                        //     obj.position.set(100, 30, -300);
+                        //     _this.scene.add(obj);
+                        // }
                         obj.scale.set(30, 30, 30);
-                        obj.position.set(100, 30, -300);
-                        this.scene.add(obj);
+                        obj.position.set(0, 0, 0);
+                        _this.scene.add(obj);
                     });
                 });
             },
             // 初始化模型
             initContent() {
-                let helper = new THREE.GridHelper(1200, 50, 0xCD3700, 0x4A4A4A);
-                this.scene.add(helper);
-
                 let cubeGeometry = new THREE.BoxGeometry(100, 100, 100);
                 let cubeMaterial = new THREE.MeshLambertMaterial({color: 0x9370DB});
                 let cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
