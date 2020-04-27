@@ -100,7 +100,7 @@
 
                 let loader = new THREE.ObjectLoader()
 
-                loader.load('./file.json', group => {
+                loader.load('models/file.json', group => {
                     //处理加载模型为黑色问题
                     group.traverse(child => {
                         if (child.isMesh) {
