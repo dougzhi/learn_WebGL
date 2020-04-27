@@ -34,6 +34,11 @@ Vue.use(VueRouter)
     path: '/test5',
     name: 'test5',
     component: () => import(/* webpackChunkName: "about" */ '../components/test5.vue')
+  },
+  {
+    path: '/test6',
+    name: 'test6',
+    component: () => import(/* webpackChunkName: "about" */ '../components/test6.vue')
   }
 ]
 
