@@ -5,6 +5,9 @@
     <router-link to="/test2">测试二</router-link>
     <br/>
     <router-link to="/test3">测试三</router-link>
+    <br/>
+    <router-link to="/test4">测试四</router-link>
+
   </div>
 </template>
 
